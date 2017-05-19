@@ -8,7 +8,7 @@ public class App
 {
     public static void main( String[] args )
     {
-    	System.out.println($ENV);
+    	System.out.println("$ENV");
         System.out.println( "Hello World!" );
     }
 }
