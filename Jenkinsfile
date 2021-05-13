@@ -16,7 +16,7 @@ pipeline {
         stage('Docker build') {
             // agent { docker 'openjdk:8-jre' }
             steps {
-                def app = docker.build("ananthulasrikar/test")
+                app = docker.build("ananthulasrikar/test")
             }
         }
 
