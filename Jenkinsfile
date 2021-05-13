@@ -8,30 +8,31 @@ pipeline {
         }
 
         stage('Example Build') {
-          agent {
-            docker {
-                image 'maven:3.8.1-adoptopenjdk-11'
-                args '-v /Users/srikarananthula/.m2:/root/.m2'
-            }
-          }
+          // agent {
+          //   docker {
+          //       image 'maven:3.8.1-adoptopenjdk-11'
+          //       args '-v /Users/srikarananthula/.m2:/root/.m2'
+          //   }
+          // }
 
           steps {
               echo 'Hello, Maven'
               sh 'mvn package'
           }
         }
-        // stage('Docker build') {
-        //     // agent { docker 'openjdk:8-jre' }
-        //     steps {
-        //         docker.build("ananthulasrikar/test")
-        //     }
-        // }
-        //
+        stage('Docker build') {
+            // agent { docker 'openjdk:8-jre' }
+            steps {
+                docker.build("ananthulasrikar/test")
+                docker.withRegistry('', 'dockerhub') {
+                docker.push()
+                }
+            }
+        }
+
         // stage('Docker push image') {
         //     steps {
-        //        docker.withRegistry('', 'dockerhub') {
-        //            app.push()
-        //        }
+        //
         //     }
         // }
     }
