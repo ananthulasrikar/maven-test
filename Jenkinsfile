@@ -8,11 +8,17 @@ pipeline {
         }
 
         stage('Example Build') {
-            agent { docker 'maven:3.8.1-openjdk-11' }
-            steps {
-                echo 'Hello, Maven'
-                sh 'mvn package'
+          agent {
+            docker {
+                image 'maven:3.8.1-adoptopenjdk-11'
+                args '-v $HOME/.m2:/root/.m2'
             }
+          }
+
+          steps {
+              echo 'Hello, Maven'
+              sh 'mvn package'
+          }
         }
         // stage('Docker build') {
         //     // agent { docker 'openjdk:8-jre' }
