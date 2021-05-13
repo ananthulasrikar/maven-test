@@ -1,6 +1,4 @@
 pipeline {
-    def app
-    agent none
     stages {
         stage('Clone repository') {
             steps {
@@ -18,7 +16,7 @@ pipeline {
         stage('Docker build') {
             // agent { docker 'openjdk:8-jre' }
             steps {
-                app = docker.build("ananthulasrikar/test")
+                def app = docker.build("ananthulasrikar/test")
             }
         }
 
