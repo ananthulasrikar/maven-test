@@ -28,17 +28,18 @@ pipeline {
             steps {
                 script {
                   dockerImage = docker.build("ananthulasrikar/test")
-                  dockerImage.withRegistry('', 'dockerhub') {
-                    dockerImage.push()
-                  }
               }
             }
         }
 
-        // stage('Docker push image') {
-        //     steps {
-        //
-        //     }
-        // }
+        stage('Docker push image') {
+            steps {
+              script {
+                dockerImage.withRegistry('', 'dockerhub') {
+                  dockerImage.push()
+                }
+              }
+            }
+        }
     }
 }
