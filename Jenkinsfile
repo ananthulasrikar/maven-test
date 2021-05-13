@@ -13,19 +13,19 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage('Docker build') {
-            // agent { docker 'openjdk:8-jre' }
-            steps {
-                app = docker.build("ananthulasrikar/test")
-            }
-        }
-
-        stage('Docker push image') {
-            steps {
-               docker.withRegistry('', 'dockerhub') {
-                   app.push()
-               }
-            }
-        }
+        // stage('Docker build') {
+        //     // agent { docker 'openjdk:8-jre' }
+        //     steps {
+        //         app = docker.build("ananthulasrikar/test")
+        //     }
+        // }
+        //
+        // stage('Docker push image') {
+        //     steps {
+        //        docker.withRegistry('', 'dockerhub') {
+        //            app.push()
+        //        }
+        //     }
+        // }
     }
 }
