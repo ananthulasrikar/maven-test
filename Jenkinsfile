@@ -1,4 +1,7 @@
 pipeline {
+  environment {
+    dockerImage = ''
+  }
   agent any
     stages {
         stage('Clone repository') {
@@ -24,9 +27,9 @@ pipeline {
             // agent { docker 'openjdk:8-jre' }
             steps {
                 script {
-                  docker.build("ananthulasrikar/test")
-                  docker.withRegistry('', 'dockerhub') {
-                    docker.push()
+                  dockerImage = docker.build("ananthulasrikar/test")
+                  dockerImage.withRegistry('', 'dockerhub') {
+                    dockerImage.push()
                   }
               }
             }
