@@ -1,5 +1,6 @@
 pipeline {
   environment {
+    registryCredential = 'dockerhub'
     dockerImage = ''
   }
   agent any
@@ -35,7 +36,7 @@ pipeline {
         stage('Docker push image') {
             steps {
               script {
-                withDockerRegistry(credentialsId: 'dockerhub') {
+                docker.withRegistry('', registryCredential) {
                   dockerImage.push('latest')
                 }
                 // docker.withRegistry('', 'dockerhub') {
