@@ -22,12 +22,14 @@ pipeline {
         }
         stage('Docker build') {
             // agent { docker 'openjdk:8-jre' }
-            steps {
-                docker.build("ananthulasrikar/test")
-                docker.withRegistry('', 'dockerhub') {
-                docker.push()
-                }
-            }
+            script {
+              steps {
+                  docker.build("ananthulasrikar/test")
+                  docker.withRegistry('', 'dockerhub') {
+                  docker.push()
+                  }
+              }
+            }  
         }
 
         // stage('Docker push image') {
