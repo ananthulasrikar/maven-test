@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone repository') {
             steps {
-                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/develop']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'ba8e46a2-d793-4638-8c83-1a153cebe424', url: 'https://github.com/chandanikumari/mavenDemo.git']]]
+                checkout changelog: false, poll: false, scm: [$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'ba8e46a2-d793-4638-8c83-1a153cebe424', url: 'https://github.com/ananthulasrikar/maven-test.git']]]
             }
         }
 
@@ -14,12 +14,12 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        // stage('Docker build') {
-        //     // agent { docker 'openjdk:8-jre' }
-        //     steps {
-        //         app = docker.build("ananthulasrikar/test")
-        //     }
-        // }
+        stage('Docker build') {
+            // agent { docker 'openjdk:8-jre' }
+            steps {
+                docker.build("ananthulasrikar/test")
+            }
+        }
         //
         // stage('Docker push image') {
         //     steps {
