@@ -38,7 +38,7 @@ pipeline {
     stage('Docker push image') {
       steps {
         script {
-          withDockerRegistry('https://index.docker.io/v2/', registryCredential) {
+          withDockerRegistry('', registryCredential) {
           //docker.withRegistry('', registryCredential) {
             Image.push('latest')
           }
