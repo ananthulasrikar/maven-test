@@ -49,10 +49,14 @@
 //   }
 // }
 
-
-
 node {
     checkout scm
-    def customImage = docker.build("test:${env.BUILD_ID}")
-    customImage.push()
+
+    docker.withRegistry('', 'dockerhub') {
+
+        def customImage = docker.build("test:${env.BUILD_ID}")
+
+        /* Push the container to the custom Registry */
+        customImage.push()
+    }
 }
