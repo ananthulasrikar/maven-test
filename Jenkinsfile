@@ -37,8 +37,8 @@ pipeline {
     }
     stage('Docker push image') {
       steps {
-        script {
-          withDockerRegistry('', registryCredential) {
+        script { 
+          withDockerRegistry(credentialsId: 'dockerhub') {
           //docker.withRegistry('', registryCredential) {
             Image.push('latest')
           }
