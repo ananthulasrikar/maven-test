@@ -48,15 +48,28 @@
 //     }
 //   }
 // }
+//
+// node {
+//     checkout scm
+//
+//     docker.withRegistry('https://hub.docker.com', 'dockerhub') {
+//
+//         def customImage = docker.build("test:${env.BUILD_ID}")
+//
+//         /* Push the container to the custom Registry */
+//         customImage.push()
+//     }
+// }
 
-node {
-    checkout scm
-
-    docker.withRegistry('https://hub.docker.com', 'dockerhub') {
-
-        def customImage = docker.build("test:${env.BUILD_ID}")
-
-        /* Push the container to the custom Registry */
-        customImage.push()
+pipeline {
+    agent {
+        docker { image 'node:14-alpine' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
     }
 }
