@@ -31,16 +31,18 @@ pipeline {
       // agent { docker 'openjdk:8-jre' }
       steps {
         script {
-          build("ananthulasrikar/test")
+          dockerImage = docker.build("ananthulasrikar/test")
         }
       }
     }
     stage('Docker push image') {
       steps {
+        script {
           withRegistry('https://index.docker.io/v2/', registryCredential) {
           //docker.withRegistry('', registryCredential) {
             Image.push('latest')
           }
+        }
       }
     }
   }
